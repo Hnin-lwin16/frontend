@@ -5,6 +5,9 @@ import Layout from "./components/common/Layout"
 import Product from "./components/Product"
 import Cart from "./components/Cart"
 import Checkout from "./components/Checkout"
+import Login from "./components/admin/Login"
+import Dashboard from "./components/admin/Dashboard"
+import { AdminRequireAuth } from "./components/admin/AdminRequireAuth"
 
 const router = createBrowserRouter([
  {
@@ -30,6 +33,20 @@ const router = createBrowserRouter([
   {
     path:"/checkout",
     element:<Checkout/>
+  },
+  {
+    path:"/admin/login",
+    element: <Login/>
+  },
+  {
+    path:"/admin/dashboard",
+    element:<AdminRequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<Dashboard/>
+      }
+    ]
   }
   ]
  }
