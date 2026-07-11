@@ -61,7 +61,7 @@ const Login = () => {
     })
 }
                     type="text" className={`form-control ${errors.email && 'is-invalid'}`}  placeholder='Email' />
-                    {errors.email && <p className='invalid.feedback'>{errors.email?.message}</p>}
+                    {errors.email && <p className='invalid-feedback'>{errors.email?.message}</p>}
                 </div>
                 <div className='mb-3'>
                     <label htmlFor="" className='form-label'>
@@ -73,7 +73,7 @@ const Login = () => {
                     })}
                     type="password" className={`form-control ${errors.password && 'is-invalid'}`} 
                     placeholder='Password' />
-                    {errors.password && <p className='invalid.feedback'>{errors.password?.message}</p>}
+                    {errors.password && <p className='invalid-feedback'>{errors.password?.message}</p>}
 
                 </div>
                 <button className=' btn btn-secondary'>Login</button>

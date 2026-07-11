@@ -8,6 +8,9 @@ import Checkout from "./components/Checkout"
 import Login from "./components/admin/Login"
 import Dashboard from "./components/admin/Dashboard"
 import { AdminRequireAuth } from "./components/admin/AdminRequireAuth"
+import Show from "./components/admin/category/Show"
+import Create from "./components/admin/category/Create"
+import Edit from "./components/admin/category/Edit"
 
 
 
@@ -47,6 +50,24 @@ const router = createBrowserRouter([
       {
        index:true,
        element:<Dashboard/>
+      }
+    ]
+  },
+   {
+    path:"/admin/categories",
+    element:<AdminRequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<Show/>
+      },
+      {
+        path:"create",
+        element:<Create/>
+      },
+      {
+        path:"edit/:id",
+        element:<Edit/>
       }
     ]
   }
