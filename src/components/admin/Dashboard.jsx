@@ -5,7 +5,7 @@ import Sidebar from '../common/Sidebar';
 const Dashboard = () => {
    
   return (
-    <>
+    
  <div className='container'>
   <div className=' row'>
     <div className=' d-flex justify-content-between mt-5 pb-3'>
@@ -59,7 +59,7 @@ const Dashboard = () => {
     </div>
   </div>
  </div>
-    </>
+    
   )
 }
 
