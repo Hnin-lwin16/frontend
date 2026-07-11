@@ -8,10 +8,12 @@ import Checkout from "./components/Checkout"
 import Login from "./components/admin/Login"
 import Dashboard from "./components/admin/Dashboard"
 import { AdminRequireAuth } from "./components/admin/AdminRequireAuth"
-import Show from "./components/admin/category/Show"
-import Create from "./components/admin/category/Create"
-import Edit from "./components/admin/category/Edit"
-
+import CategoryShow from "./components/admin/category/Show";
+import CategoryCreate from "./components/admin/category/Create";
+import CategoryEdit from "./components/admin/category/Edit";
+import BrandShow from "./components/admin/brand/Show";
+import BrandCreate from "./components/admin/brand/Create";
+import BrandEdit from "./components/admin/brand/Edit"
 
 
 const router = createBrowserRouter([
@@ -59,15 +61,33 @@ const router = createBrowserRouter([
     children:[
       {
        index:true,
-       element:<Show/>
+       element:<CategoryShow/>
       },
       {
         path:"create",
-        element:<Create/>
+        element:<CategoryCreate/>
       },
       {
         path:"edit/:id",
-        element:<Edit/>
+        element:<CategoryEdit/>
+      }
+    ]
+  },
+  {
+    path:"/admin/brands",
+    element:<AdminRequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<BrandShow/>
+      },
+      {
+        path:"create",
+        element:<BrandCreate/>
+      },
+      {
+        path:"edit/:id",
+        element:<BrandEdit/>
       }
     ]
   }
