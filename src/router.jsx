@@ -13,7 +13,10 @@ import CategoryCreate from "./components/admin/category/Create";
 import CategoryEdit from "./components/admin/category/Edit";
 import BrandShow from "./components/admin/brand/Show";
 import BrandCreate from "./components/admin/brand/Create";
-import BrandEdit from "./components/admin/brand/Edit"
+import BrandEdit from "./components/admin/product/Edit";
+import ProductShow from "./components/admin/product/Show";
+import ProductCreate from "./components/admin/product/Create";
+import ProductEdit from "./components/admin/product/Edit"
 
 
 const router = createBrowserRouter([
@@ -88,6 +91,24 @@ const router = createBrowserRouter([
       {
         path:"edit/:id",
         element:<BrandEdit/>
+      }
+    ]
+  },
+   {
+    path:"/admin/products",
+    element:<AdminRequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<ProductShow/>
+      },
+      {
+        path:"create",
+        element:<ProductCreate/>
+      },
+      {
+        path:"edit/:id",
+        element:<ProductEdit/>
       }
     ]
   }
