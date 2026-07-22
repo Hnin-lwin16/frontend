@@ -1,71 +1,64 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductOneImg from "../../assets/images/eleven.jpg"
 
 const FeatureProducts = () => {
+  const [products,setProducts] = useState([]);
+    const featuredProducts = async ()=>{
+      await fetch(`${import.meta.env.VITE_API_URL}/get-featured-products`,{
+            method: 'GET',
+            headers:{
+              'Content-type': 'application/json',
+              'Accept': 'application/json',
+             
+            }
+          })
+          .then(res => res.json())
+          .then(result => {
+            // setProducts(result);
+            setProducts(result.data);
+          //  console.log(result);
+          console.log(products);
+          })
+        
+    }
+    console.log(products);
+    useEffect(() => {
+      featuredProducts();
+    },[]);
   return (
  <section className='section-2 py-5'>
     <div className=' container'>
       <h2>
         Features Product
       </h2>
-      <div className='row mt-4'>
-        <div className='col-md-3 col-6'>
-          <div className='product card border-0'>
-            <div className=' card-img'>
-              <img src={ProductOneImg} className=' w-100'/>
-            </div>
-            <div className=' card-body pt-3'>
-              <a href="">Red Check Shirt for Men</a>
-              <div className=' price'>
-                $50 <span className=' text-decoration-line-through'>$80</span>
-              </div>
-            </div>
-          </div>
-         
-        </div>
+       <div className='row mt-4'>
+     {
+      products && products.map(product =>{
+        return(
+          
+      
+        
          <div className='col-md-3 col-6'>
           <div className='product card border-0'>
             <div className=' card-img'>
-              <img src={ProductOneImg} className=' w-100'/>
+              <img src={product.image_url} className=' w-100'/>
             </div>
             <div className=' card-body pt-3'>
-              <a href="">Red Check Shirt for Men</a>
+              <a href="">{product.title}</a>
               <div className=' price'>
-                $50 <span className=' text-decoration-line-through'>$80</span>
-              </div>
+                ${product.price} 
+                {
+                  product.compare_price &&  <span className=' text-decoration-line-through'> ${product.compare_price}</span>
+                }              </div>
             </div>
           </div>
          
         </div>
-         <div className='col-md-3 col-6'>
-          <div className='product card border-0'>
-            <div className=' card-img'>
-              <img src={ProductOneImg} className=' w-100'/>
-            </div>
-            <div className=' card-body pt-3'>
-              <a href="">Red Check Shirt for Men</a>
-              <div className=' price'>
-                $50 <span className=' text-decoration-line-through'>$80</span>
-              </div>
-            </div>
-          </div>
-         
-        </div>
-         <div className='col-md-3 col-6'>
-          <div className='product card border-0'>
-            <div className=' card-img'>
-              <img src={ProductOneImg} className=' w-100'/>
-            </div>
-            <div className=' card-body pt-3'>
-              <a href="">Red Check Shirt for Men</a>
-              <div className=' price'>
-                $50 <span className=' text-decoration-line-through'>$80</span>
-              </div>
-            </div>
-          </div>
-         
-        </div>
-      </div>
+      
+        )
+      })
+     }
+     </div>
     </div>
    </section>
   )
