@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import ProductOneImg from "../../assets/images/eight.jpg"
 import { token } from './http'
+import { Link, useParams } from 'react-router-dom';
 
 const LatestProduct = () => {
   const [products,setProducts] = useState([]);
+  
   const latestProducts = async ()=>{
     await fetch(`${import.meta.env.VITE_API_URL}/get-latest-products`,{
           method: 'GET',
@@ -39,10 +41,11 @@ const LatestProduct = () => {
               <div className='col-md-3 col-6' key={`product-${product.id}`}>
           <div className='product card border-0'>
             <div className=' card-img'>
-              <img src={product.image_url} className=' w-100'/>
+              <Link to={`/product/${product.id}`}><img src={product.image_url} className=' w-100'/></Link>
+              
             </div>
             <div className=' card-body pt-3'>
-              <a href="">{product.title}</a>
+              <Link to={`/product/${product.id}`}>{product.title}</Link>
               <div className=' price'>
                 $ {product.price} 
                 {
