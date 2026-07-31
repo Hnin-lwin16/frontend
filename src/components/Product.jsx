@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs, FreeMode, Navigation } from "swiper/modules";
@@ -13,6 +13,8 @@ import { Rating } from "react-simple-star-rating";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import BreadCrumb from "./common/BreadCrumb";
+import { CartContext } from "./context/Cart";
+import { toast } from "react-toastify";
 
 const Product = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -20,7 +22,10 @@ const Product = () => {
   const [product,setProduct] = useState([]);
   const [productImages,setProductImages] = useState([]);
   const [productSizes,setProductSizes] = useState([]);
+  const [sizeSelected,setSizeSelected] = useState(null);
   const {id} = useParams();
+  const {addToCart} = useContext(CartContext);
+  
 const fetchProduct = async () => {
      await fetch(`${import.meta.env.VITE_API_URL}/get-product/${id}`,{
           method: 'GET',
@@ -43,6 +48,20 @@ const fetchProduct = async () => {
           }
          
         })
+  }
+  const handleAddToCart = () => {
+    console.log("start");
+    if(productSizes.length > 0){
+       if(sizeSelected == null){
+        toast.error("Please select a size")
+    }else {
+      addToCart(product,sizeSelected)
+      toast.success("Product successfully added to cart");
+    }
+    }else{
+      addToCart(product,null)
+    }
+   
   }
   useEffect(() => {
     fetchProduct()
@@ -77,7 +96,7 @@ const fetchProduct = async () => {
                   {
                     productImages && productImages.map((product_image) => {
                       return (
-                        <SwiperSlide>
+                        <SwiperSlide key={`image-sm-${Product.image_id}`}>
                     <div className="content">
                       <img
                         src={product_image.image_url}
@@ -116,7 +135,7 @@ const fetchProduct = async () => {
                    {
                     productImages && productImages.map((product_image) => {
                       return (
-                        <SwiperSlide>
+                       <SwiperSlide key={`image-${Product.image_id}`}>
                     <div className="content">
                       <img src={product_image.image_url} alt="" className="w-100" />
                     </div>
@@ -153,7 +172,7 @@ const fetchProduct = async () => {
                {
                 productSizes && productSizes.map(product_size =>{
                   return(
-                     <button className="btn btn-size ms-1">{product_size.size.name}</button>
+                     <button key={`p-size-${product_size.id}`} onClick={ () => setSizeSelected(product_size.size.name)} className={`btn btn-size ms-2 ${sizeSelected == product_size.size.name ? 'active' : ''}`}>{product_size.size.name}</button>
                   )
                 })
                }
@@ -161,7 +180,7 @@ const fetchProduct = async () => {
               </div>
             </div>
             <div className="add-to-cart my-4">
-              <button className="btn btn-primary text-uppercase">
+              <button onClick={() => handleAddToCart()} className="btn btn-primary text-uppercase">
                 Add to Cart
               </button>
             </div>

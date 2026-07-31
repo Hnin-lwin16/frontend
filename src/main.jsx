@@ -7,11 +7,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./assets/css/style.scss";
   import { ToastContainer, toast } from 'react-toastify';
 import { AdminAuthProvider } from './components/context/AdminAuth.jsx'
+import { CartProvider } from './components/context/Cart.jsx'
 
 createRoot(document.getElementById('root')).render(
 <>
   <AdminAuthProvider>
-    <RouterProvider router={router} />
+
+   <CartProvider>
+     <RouterProvider router={router} />
+   </CartProvider>
   </AdminAuthProvider>
 <ToastContainer/>
 </>
