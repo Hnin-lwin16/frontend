@@ -8,14 +8,16 @@ import "./assets/css/style.scss";
   import { ToastContainer, toast } from 'react-toastify';
 import { AdminAuthProvider } from './components/context/AdminAuth.jsx'
 import { CartProvider } from './components/context/Cart.jsx'
+import { AuthProvider } from './components/context/Auth.jsx'
 
 createRoot(document.getElementById('root')).render(
 <>
   <AdminAuthProvider>
-
+  <AuthProvider>
    <CartProvider>
      <RouterProvider router={router} />
    </CartProvider>
+   </AuthProvider>
   </AdminAuthProvider>
 <ToastContainer/>
 </>

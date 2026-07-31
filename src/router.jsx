@@ -17,7 +17,10 @@ import BrandEdit from "./components/admin/product/Edit";
 import ProductShow from "./components/admin/product/Show";
 import ProductCreate from "./components/admin/product/Create";
 import ProductEdit from "./components/admin/product/Edit"
-
+import Register from "./components/Register"
+import AccountLogin from "./components/Login"
+import Profile from "./components/Profile"
+import { RequireAuth } from "./components/RequireAuth"
 
 const router = createBrowserRouter([
  {
@@ -43,6 +46,18 @@ const router = createBrowserRouter([
   {
     path:"/checkout",
     element:<Checkout/>
+  },
+  {
+    path:"/account/register",
+    element: <Register/>
+  },
+  {
+    path:"/account/login",
+    element:<AccountLogin/>
+  },
+  {
+    path:"/account",
+    element:<Profile/>
   },
   {
     path:"/admin/login",
@@ -111,7 +126,17 @@ const router = createBrowserRouter([
         element:<ProductEdit/>
       }
     ]
-  }
+  },
+  {
+    path:"/account",
+    element:<RequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<Profile/>
+      }
+    ]
+  },
   ]
  }
 ])
