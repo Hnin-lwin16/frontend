@@ -21,6 +21,11 @@ import Register from "./components/Register"
 import AccountLogin from "./components/Login"
 import Profile from "./components/Profile"
 import { RequireAuth } from "./components/RequireAuth"
+import Confirmation from "./components/Confirmation"
+import ShowOrders from "./components/admin/orders/ShowOrders"
+import OrderDetail from "./components/admin/orders/OrderDetail"
+import Orders from "./components/front/Orders"
+import FrontOrderDetail from "./components/front/OrderDetail"
 
 const router = createBrowserRouter([
  {
@@ -135,6 +140,52 @@ const router = createBrowserRouter([
        index:true,
        element:<Profile/>
       }
+    ]
+  },
+  {
+    path:"/checkout",
+    element:<RequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<Checkout/>
+      }
+    ]
+  },
+   {
+    path:"/order/confirmation/:id",
+    element:<RequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<Confirmation/>
+      }
+    ]
+  },{
+    path:"/account/orders",
+    element:<RequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<Orders/>
+      },{
+        path:"detail/:id",
+        element:<FrontOrderDetail/>
+      }
+    ]
+  },
+  {
+    path:"/admin/orders",
+    element:<AdminRequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<ShowOrders/>
+      },
+     {
+      path:":id",
+      element:<OrderDetail/>
+     }
     ]
   },
   ]
