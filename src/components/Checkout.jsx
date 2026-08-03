@@ -15,9 +15,35 @@ const Checkout = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     setError,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: async () => {
+       fetch(`${import.meta.env.VITE_API_URL}/get-profile-details`,{
+                           method: 'GET',
+                           headers:{
+                               'Content-type': 'application/json',
+                               'Accept':'application/json',
+                               'Authorization': `Bearer ${userToken()}`
+                           },
+                          
+                       }).then(res => res.json())
+                       .then(result =>{
+                        // setLoading(false)
+                           console.log(result);
+                          reset({
+                            name:result.data.name,
+                            email: result.data.email,
+                            mobile: result.data.mobile,
+                            address: result.data.address,
+                            city : result.data.city,
+                            state: result.data.state,
+                            
+                          })
+                       })
+    }
+  });
   const processOrder = (data) => {
     // console.log(data);
     if (payment === "cod") {
