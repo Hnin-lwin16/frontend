@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import BreadCrumb from "./common/BreadCrumb";
 import productImg from "../assets/images/Mens/eight.jpg";
 import { CartContext } from "./context/Cart";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cartData, grandTotal, shipping, subTotal,updateCartItem ,deleteCartItem} = useContext(CartContext);
@@ -101,9 +102,9 @@ const Cart = () => {
             <div>${grandTotal()}</div>
           </div>
           <div className="d-flex justify-content-end py-3">
-            <button className="btn btn-primary w-100">
+            <Link to={'/checkout'} className="btn btn-primary w-100">
               Proceed to Checkout
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ const UserSidebar = () => {
               <Link to="/account">Account</Link>
             </li>
             <li>
-              <Link to="/admin/categories">Orders</Link>
+              <Link to="/account/orders">Orders</Link>
             </li>
             <li>
               <Link to="/admin/brands">Change Password</Link>
