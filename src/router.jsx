@@ -26,6 +26,7 @@ import ShowOrders from "./components/admin/orders/ShowOrders"
 import OrderDetail from "./components/admin/orders/OrderDetail"
 import Orders from "./components/front/Orders"
 import FrontOrderDetail from "./components/front/OrderDetail"
+import Shipping from "./components/admin/shipping/Shipping"
 
 const router = createBrowserRouter([
  {
@@ -129,6 +130,16 @@ const router = createBrowserRouter([
       {
         path:"edit/:id",
         element:<ProductEdit/>
+      }
+    ]
+  },
+  {
+    path:"/admin/shipping",
+    element:<AdminRequireAuth/>,
+    children:[
+      {
+       index:true,
+       element:<Shipping/>
       }
     ]
   },
